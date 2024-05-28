@@ -34,7 +34,6 @@ public class AccountServiceApplication {
 			return args ->{
 				List<BankAccount> accountList= List.of(
 						BankAccount.builder()
-						.accountId(UUID.randomUUID().toString())
 						.currency("MAD")
 						.balance(9800)
 						.createAt(LocalDate.now())
@@ -42,7 +41,6 @@ public class AccountServiceApplication {
 						.customerId(Long.valueOf(1))
 						.build(),
 						BankAccount.builder()
-						.accountId(UUID.randomUUID().toString())
 						.currency("MAD")
 						.balance(1200)
 						.createAt(LocalDate.now())
