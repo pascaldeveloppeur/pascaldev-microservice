@@ -1,8 +1,8 @@
 create table account (
+        id bigint not null,
         balance float(53) not null,
         create_at date,
         customer_id bigint,
-        id bigserial not null,
         currency varchar(255),
         type varchar(255) check (type in ('CURRENT_ACCOUNT','SAVING_ACCOUNT')),
         primary key (id)
