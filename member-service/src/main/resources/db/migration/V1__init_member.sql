@@ -7,8 +7,8 @@ create table member (
 		email varchar(255) not null unique, 
 		password varchar(255) unique, 
 		primary key (id)
-	)
-create sequence user_seq start with 1 increment by 1
+	);
+create sequence user_seq start with 1 increment by 1;
 
 create table registration (
 		amount float(53), 
@@ -17,5 +17,5 @@ create table registration (
 		member_id bigint unique, 
 		member_status varchar(255) check (member_status in ('CLASSIC','SENIOR','DISPORA')), 
 		primary key (id)
-	)
-create sequence registration_seq start with 1 increment by 1
+	);
+create sequence registration_seq start with 1 increment by 1;
