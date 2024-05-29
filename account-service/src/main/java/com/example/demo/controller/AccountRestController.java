@@ -21,9 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class AccountRestController {
 	
 	private final BankAccountRepository accountRepository;
-	
-	@Autowired
-	private final CustomerRestClient customerRestClient;
+	private  CustomerRestClient customerRestClient;
 	
 	
 	
