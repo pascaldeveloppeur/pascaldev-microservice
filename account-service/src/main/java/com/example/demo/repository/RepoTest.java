@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.example.demo.entities.BankAccount;
 
-public interface RepoTest extends JpaRepository<BankAccount, String> {
+public interface RepoTest extends JpaRepository<BankAccount, Long> {
 
 	@Query("select p from BanckAccount p where p.currensy like :x and p.balance>:y")
 	public List<BankAccount> chercherAccounts(

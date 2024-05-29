@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 public class AccountRestController {
 	
 	private final BankAccountRepository accountRepository;
+	
+	@Autowired
 	private final CustomerRestClient customerRestClient;
 	
 	
@@ -30,7 +33,7 @@ public class AccountRestController {
 	} 
 	
 	@GetMapping("/accounts/{id}")
-	public BankAccount bankAccountById(@PathVariable String id) {
+	public BankAccount bankAccountById(@PathVariable Long id) {
 		
 		BankAccount account = accountRepository.findById(id).get(); 
 		Customer customer = customerRestClient.findCustomerById(account.getCustomerId());
