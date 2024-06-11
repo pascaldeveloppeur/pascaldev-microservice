@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.dev.model.Member;
 import org.dev.model.MemberException;
 import org.dev.model.Registration;
-import org.dev.service.RegistrationService;
+import org.dev.serviceImpl.RegistrationServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class RegistrationController {
 	
 	@Autowired
 	
-	RegistrationService service;
+	RegistrationServiceImpl service;
 	
 
 	@GetMapping("/registrations")

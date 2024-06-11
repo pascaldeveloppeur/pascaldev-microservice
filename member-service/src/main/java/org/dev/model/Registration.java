@@ -20,13 +20,15 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @Entity
 @Table(name = "registration")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Registration implements Serializable {
+@SuperBuilder
+public class Registration extends AbstractEntity implements Serializable {
 	
 	/**
 	 * @author Pascal Dev

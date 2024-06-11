@@ -4,9 +4,10 @@ package org.dev.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.dev.dto.MemberDTO;
 import org.dev.model.Member;
 import org.dev.model.MemberException;
-import org.dev.service.MemberService;
+import org.dev.serviceImpl.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	  @Autowired
-	 MemberService memberService;
+	 MemberServiceImpl memberService;
 	
 	@GetMapping("/members/{id}")
 	@ResponseStatus(HttpStatus.OK)
@@ -38,9 +39,9 @@ public class MemberController {
 		
 		try {
 			log.trace("Found : {}", "");
-			Optional<Member> member = memberService.getMemberById(id);
+			MemberDTO memberDTO = memberService.findById(id);
 			
-			return  ResponseEntity.status(HttpStatus.OK).body(member);
+			return  ResponseEntity.status(HttpStatus.OK).body(memberDTO);
 		} catch (MemberException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
@@ -56,8 +57,8 @@ public class MemberController {
 		
 		try {
 			log.trace("Found : {}", "");
-			List<Member> members = memberService.getAllMembers();
-			return  ResponseEntity.status(HttpStatus.OK).body(members);
+			List<MemberDTO> memberDTOs = memberService.findAll();
+			return  ResponseEntity.status(HttpStatus.OK).body(memberDTOs);
 		} catch (MemberException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
@@ -67,14 +68,14 @@ public class MemberController {
 	
 	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<?> createMember(@RequestBody Member member) {
+	public ResponseEntity<?> createMember(@RequestBody MemberDTO memberDTO) {
 		
-		  log.debug("Call of create member : {}", member);
+		  log.debug("Call of create member : {}", memberDTO);
 		
 		try {
 			log.trace("Save : {}", "");
-			Member _member = memberService.saveMember(member);
-			return  ResponseEntity.status(HttpStatus.OK).body(_member);
+			MemberDTO newMemberDTO = memberService.save(memberDTO);
+			return  ResponseEntity.status(HttpStatus.OK).body(newMemberDTO);
 		} catch (MemberException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
@@ -83,20 +84,17 @@ public class MemberController {
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Member> updateMember(@PathVariable("id") Long id, 
-			@RequestBody Member member){
-		Optional<Member> memberData = memberService.getMemberById(id);
+	public ResponseEntity<MemberDTO> updateMember(@PathVariable("id") Long id, 
+			@RequestBody MemberDTO memberDTO){
 		
-		if(memberData.isPresent()) {
-			Member _member = memberData.get();
-			_member.setFirstName(member.getFirstName());
-			_member.setLastName(member.getLastName());
-			_member.setUsername(member.getUsername());
-			_member.setEmail(member.getEmail());
-			return new ResponseEntity<>(memberService.saveMember(_member), HttpStatus.OK);
-		}else {
+		 log.debug("Call of update member : {}", id);
+		try {
+			MemberDTO memberDTO1 = memberService.update(id,memberDTO);
+			return new ResponseEntity<>(memberDTO1, HttpStatus.OK);
+		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
 	}
 	
 	@DeleteMapping("/delete/{id}")
@@ -106,7 +104,7 @@ public class MemberController {
 			
 			try {
 				
-				memberService.deleteMember(id);
+				memberService.delete(id);
 				return  ResponseEntity.status(HttpStatus.OK).body(true);
 			} catch (MemberException e) {
 				log.debug(e.getMessage());
