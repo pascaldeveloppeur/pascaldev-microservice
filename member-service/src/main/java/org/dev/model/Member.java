@@ -88,10 +88,7 @@ public class Member implements Serializable {
 	@OneToOne(mappedBy = "member")
 	private Registration registration;
 	
-//	@Enumerated(EnumType.STRING)
-//	@Column(name = "member_type")
-//	private MemberType memberType;
-	
+
 	
 	
 	
