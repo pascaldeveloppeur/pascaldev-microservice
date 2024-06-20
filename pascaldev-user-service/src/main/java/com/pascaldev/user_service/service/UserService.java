@@ -1,7 +1,7 @@
-package com.pascaldev.user_service.repository;
+package com.pascaldev.user_service.service;
 
+import com.pascaldev.pascaldev_utild_service.service.AbstractService;
 import com.pascaldev.user_service.dto.UserDto;
-import com.pascaldev.user_service.service.AbstractService;
 
 public interface UserService<UserDto> extends AbstractService<UserDto> {
 
