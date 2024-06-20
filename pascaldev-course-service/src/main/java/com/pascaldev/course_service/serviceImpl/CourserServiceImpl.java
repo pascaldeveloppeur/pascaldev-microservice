@@ -16,7 +16,7 @@ import com.pascaldev.course_service.model.Course;
 import com.pascaldev.course_service.model.Subject;
 import com.pascaldev.course_service.repository.CourseRepository;
 import com.pascaldev.course_service.repository.SubjectRepository;
-import com.pascaldev.course_service.service.AbstractService;
+import com.pascaldev.course_service.service.CourseService;
 import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CourserServiceImpl implements AbstractService<CourseDto> {
+public class CourserServiceImpl implements CourseService<CourseDto> {
 	
 	private final CourseRepository courseRepository;
 	private final SubjectRepository subjectRepository;
