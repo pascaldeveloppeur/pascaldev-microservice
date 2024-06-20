@@ -25,14 +25,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 @Slf4j
 @RequiredArgsConstructor
 public class UserController {
 	
 	private final UserServiceImpl userServiceImpl;
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
 
@@ -49,7 +49,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/users")
+	@GetMapping
 	@ResponseStatus(HttpStatus.OK)
 	public ResponseEntity<?> getAllUsers(){
 		 log.debug("Call of get user  : {}");

@@ -17,7 +17,7 @@ import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
 import com.pascaldev.user_service.dto.UserDto;
 import com.pascaldev.user_service.model.User;
 import com.pascaldev.user_service.repository.UserRepository;
-import com.pascaldev.user_service.repository.UserService;
+import com.pascaldev.user_service.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
