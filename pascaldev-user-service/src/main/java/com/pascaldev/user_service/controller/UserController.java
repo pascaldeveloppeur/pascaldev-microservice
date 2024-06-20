@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
 import com.pascaldev.user_service.dto.UserDto;
-import com.pascaldev.user_service.model.UserException;
 import com.pascaldev.user_service.serviceImpl.UserServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ public class UserController {
 			UserDto userDto = userServiceImpl.getById(id);
 
 			return ResponseEntity.status(HttpStatus.OK).body(userDto);
-		} catch (UserException e) {
+		} catch (PascalDevException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		}
@@ -58,7 +58,7 @@ public class UserController {
 				log.trace("Found : {}", "");
 				List<UserDto> userDtos = userServiceImpl.getAll();
 				return  ResponseEntity.status(HttpStatus.OK).body(userDtos);
-			} catch (UserException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -74,7 +74,7 @@ public class UserController {
 				log.trace("Save : {}", "");
 				UserDto newUserDto = userServiceImpl.save(userDto);
 				return  ResponseEntity.status(HttpStatus.OK).body(newUserDto);
-			} catch (UserException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -101,7 +101,7 @@ public class UserController {
 				
 				userServiceImpl.deleteById(id);
 				return  ResponseEntity.status(HttpStatus.OK).body(true);
-			} catch (UserException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}

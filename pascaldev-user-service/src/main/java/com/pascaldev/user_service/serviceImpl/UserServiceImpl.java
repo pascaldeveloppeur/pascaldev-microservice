@@ -13,9 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
 import com.pascaldev.user_service.dto.UserDto;
 import com.pascaldev.user_service.model.User;
-import com.pascaldev.user_service.model.UserException;
 import com.pascaldev.user_service.repository.UserRepository;
 import com.pascaldev.user_service.repository.UserService;
 
@@ -41,9 +41,9 @@ public class UserServiceImpl implements UserService<UserDto> {
 			}
 			User newUser = user.get();
 			return UserDto.fromUser(newUser);
-		}catch (UserException e) {
+		}catch (PascalDevException e) {
 //			String message = messageSource.getMessage("not found user",new Object[] {user}, locale);
-			throw new UserException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "not found user");
+			throw new PascalDevException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "not found user");
 		} catch (Exception e) {
 			throw e;
 		}
@@ -73,10 +73,10 @@ public class UserServiceImpl implements UserService<UserDto> {
 		
 		try {
 			if(userDto == null) {
-				throw new UserException("unable.save.null.user");
+				throw new PascalDevException("unable.save.null.user");
 			}
 			if(!StringUtils.hasText(userDto.getName())) {
-				throw new UserException("unable.save.user.with.empty.name");
+				throw new PascalDevException("unable.save.user.with.empty.name");
 			}
 			Optional<User> user = userRepository.findById(UserDto.fromUserDto(userDto).getId());
 			if(user.isPresent()) {
@@ -86,12 +86,12 @@ public class UserServiceImpl implements UserService<UserDto> {
 			User newUser = userRepository.save(UserDto.fromUserDto(userDto));
 			return UserDto.fromUser(newUser);
 		
-		}catch (UserException e) {
+		}catch (PascalDevException e) {
 			throw e;
 		}
 		catch (Exception e) {
 			log.error("Unexpected error while save user : {}", userDto, e);
-			throw new UserException(HttpStatus.INTERNAL_SERVER_ERROR.value(),"unable.to.save.user");
+			throw new PascalDevException(HttpStatus.INTERNAL_SERVER_ERROR.value(),"unable.to.save.user");
 		}
 		
 	}
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService<UserDto> {
 	public UserDto update(Long id, UserDto userDto) {
 		User user = UserDto.fromUserDto(getById(id));
 	     if(user == null) {
-	    	 throw new UserException("unable.to.update.null.user");
+	    	 throw new PascalDevException("unable.to.update.null.user");
 	    	 
 	     }
 			user.setName(userDto.getName());
@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService<UserDto> {
 		log.trace("try to delete use by id: {}", id);
 		try {
 			if(id == null) {
-				throw new UserException("unable.to.delete.null.entity");
+				throw new PascalDevException("unable.to.delete.null.entity");
 			}
 			userRepository.deleteById(id);
 		} catch (Exception e) {
