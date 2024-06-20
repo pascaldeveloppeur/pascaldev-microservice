@@ -13,11 +13,11 @@ import org.springframework.util.StringUtils;
 import com.pascaldev.course_service.dto.CourseDto;
 import com.pascaldev.course_service.dto.SubjectDto;
 import com.pascaldev.course_service.model.Course;
-import com.pascaldev.course_service.model.CourseException;
 import com.pascaldev.course_service.model.Subject;
 import com.pascaldev.course_service.repository.CourseRepository;
 import com.pascaldev.course_service.repository.SubjectRepository;
 import com.pascaldev.course_service.service.AbstractService;
+import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,9 +42,9 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 			}
 			Course newCourse = course.get();
 			return CourseDto.fromCourse(newCourse);
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 //			String message = messageSource.getMessage("not found user",new Object[] {user}, locale);
-			throw new CourseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "not found course");
+			throw new PascalDevException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "not found course");
 		} catch (Exception e) {
 			throw e;
 		}
@@ -72,10 +72,10 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 
 		try {
 			if (courseDto == null) {
-				throw new CourseException("unable.save.null.course");
+				throw new PascalDevException("unable.save.null.course");
 			}
 			if (!StringUtils.hasText(courseDto.getCourseName())) {
-				throw new CourseException("unable.save.course.with.empty.name");
+				throw new PascalDevException("unable.save.course.with.empty.name");
 			}
 			Optional<Course> course = courseRepository.findById(CourseDto.fromUserDto(courseDto).getId());
 			if (course.isPresent()) {
@@ -85,11 +85,11 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 			Course newCourse = courseRepository.save(CourseDto.fromUserDto(courseDto));
 			return CourseDto.fromCourse(newCourse);
 
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 			throw e;
 		} catch (Exception e) {
 			log.error("Unexpected error while save course : {}", courseDto, e);
-			throw new CourseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "unable.to.save.course");
+			throw new PascalDevException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "unable.to.save.course");
 		}
 	}
 
@@ -97,7 +97,7 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 	public CourseDto update(Long id, CourseDto courseDto) {
 		Course course = CourseDto.fromUserDto(getById(id));
 		if (course == null) {
-			throw new CourseException("unable.to.update.null.course");
+			throw new PascalDevException("unable.to.update.null.course");
 
 		}
 		course.setCourseName(courseDto.getCourseName());
@@ -113,7 +113,7 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 		log.trace("try to delete course by id: {}", id);
 		try {
 			if (id == null) {
-				throw new CourseException("unable.to.delete.null.course");
+				throw new PascalDevException("unable.to.delete.null.course");
 			}
 			courseRepository.deleteById(id);
 		} catch (Exception e) {
@@ -159,9 +159,9 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 			}
 			Subject newSubject = subject.get();
 			return SubjectDto.fromSubject(newSubject);
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 //			String message = messageSource.getMessage("not found user",new Object[] {user}, locale);
-			throw new CourseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "not found course");
+			throw new PascalDevException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "not found course");
 		} catch (Exception e) {
 			throw e;
 		}
@@ -175,10 +175,10 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 
 		try {
 			if (subjectDto == null) {
-				throw new CourseException("unable.save.null.subject");
+				throw new PascalDevException("unable.save.null.subject");
 			}
 			if (!StringUtils.hasText(subjectDto.getSubjectName())) {
-				throw new CourseException("unable.save.subject.with.empty.name");
+				throw new PascalDevException("unable.save.subject.with.empty.name");
 			}
 			Optional<Subject> subject = subjectRepository.findById(SubjectDto.fromSubjectDto(subjectDto).getId());
 			if (subject.isPresent()) {
@@ -188,11 +188,11 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
 			Subject newSubject = subjectRepository.save(SubjectDto.fromSubjectDto(subjectDto));
 			return SubjectDto.fromSubject(newSubject);
 
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 			throw e;
 		} catch (Exception e) {
 			log.error("Unexpected error while save subject : {}", subjectDto, e);
-			throw new CourseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "unable.to.save.subject");
+			throw new PascalDevException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "unable.to.save.subject");
 		}
     	
     }
@@ -200,7 +200,7 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
     public SubjectDto updateSubject(Long id, SubjectDto subjectDto) {
     	Subject subject = SubjectDto.fromSubjectDto(getSubjectById(id));
 		if (subject == null) {
-			throw new CourseException("unable.to.update.null.subject");
+			throw new PascalDevException("unable.to.update.null.subject");
 
 		}
 		subject.setSubjectName(subjectDto.getSubjectName());
@@ -218,7 +218,7 @@ public class CourserServiceImpl implements AbstractService<CourseDto> {
     	log.trace("try to delete subject by id: {}", id);
 		try {
 			if (id == null) {
-				throw new CourseException("unable.to.delete.null.course");
+				throw new PascalDevException("unable.to.delete.null.course");
 			}
 			subjectRepository.deleteById(id);
 		} catch (Exception e) {

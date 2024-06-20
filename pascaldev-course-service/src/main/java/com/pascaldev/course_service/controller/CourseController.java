@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pascaldev.course_service.dto.CourseDto;
 import com.pascaldev.course_service.dto.SubjectDto;
-import com.pascaldev.course_service.model.CourseException;
 import com.pascaldev.course_service.serviceImpl.CourserServiceImpl;
+import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class CourseController {
 			CourseDto courseDto = courserServiceImpl.getById(id);
 
 			return ResponseEntity.status(HttpStatus.OK).body(courseDto);
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		}
@@ -57,7 +57,7 @@ public class CourseController {
 				log.trace("Found : {}", "");
 				List<CourseDto> courseDtos = courserServiceImpl.getAll();
 				return  ResponseEntity.status(HttpStatus.OK).body(courseDtos);
-			} catch (CourseException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -73,7 +73,7 @@ public class CourseController {
 				log.trace("Save : {}", "");
 				CourseDto newCourseDto = courserServiceImpl.save(courseDto);
 				return  ResponseEntity.status(HttpStatus.OK).body(newCourseDto);
-			} catch (CourseException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -100,7 +100,7 @@ public class CourseController {
 				
 				courserServiceImpl.deleteById(id);
 				return  ResponseEntity.status(HttpStatus.OK).body(true);
-			} catch (CourseException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -126,7 +126,7 @@ public class CourseController {
 				log.trace("Found : {}", "");
 				List<SubjectDto> subjectDtos = courserServiceImpl.getAllSubjects();
 				return  ResponseEntity.status(HttpStatus.OK).body(subjectDtos);
-			} catch (CourseException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -142,7 +142,7 @@ public class CourseController {
 			SubjectDto subjectDto = courserServiceImpl.getSubjectById(id);
 
 			return ResponseEntity.status(HttpStatus.OK).body(subjectDto);
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		}
@@ -157,7 +157,7 @@ public class CourseController {
 				log.trace("Save : {}", "");
 				SubjectDto newSubjectDto = courserServiceImpl.createSubject(subjectDto);
 				return  ResponseEntity.status(HttpStatus.OK).body(newSubjectDto);
-			} catch (CourseException e) {
+			} catch (PascalDevException e) {
 				log.debug(e.getMessage());
 				return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 			}
@@ -182,7 +182,7 @@ public class CourseController {
 			
 			courserServiceImpl.deleteById(id);
 			return  ResponseEntity.status(HttpStatus.OK).body(true);
-		} catch (CourseException e) {
+		} catch (PascalDevException e) {
 			log.debug(e.getMessage());
 			return ResponseEntity.status(e.getStatusCode()).body(e.getMessage());
 		}
