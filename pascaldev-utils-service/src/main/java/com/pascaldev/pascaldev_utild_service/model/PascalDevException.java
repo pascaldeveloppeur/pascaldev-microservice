@@ -1,7 +1,6 @@
 package com.pascaldev.pascaldev_utild_service.model;
 
-import org.slf4j.helpers.MessageFormatter;
-import org.springframework.http.HttpStatus;
+
 
 /**
  * @author Pascal Dev
