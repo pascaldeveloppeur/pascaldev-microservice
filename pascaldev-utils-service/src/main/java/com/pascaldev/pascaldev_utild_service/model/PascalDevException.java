@@ -1,6 +1,7 @@
 package com.pascaldev.pascaldev_utild_service.model;
 
-
+import org.slf4j.helpers.MessageFormatter;
+import org.springframework.http.HttpStatus;
 
 /**
  * @author Pascal Dev
@@ -12,6 +13,7 @@ public class PascalDevException extends RuntimeException {
 	private int statusCode;
 
 	public PascalDevException() {
+		
 		
 		this.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
 	}
