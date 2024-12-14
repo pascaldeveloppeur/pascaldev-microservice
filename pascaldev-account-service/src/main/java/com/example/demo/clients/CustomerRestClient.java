@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.model.Customer;
 
-@FeignClient(name= "CUSTOMER-SERVICE",url = "http://localhost:8084/api")
+@FeignClient(name= "customer-service",url = "http://localhost:8084/api")
 public interface CustomerRestClient {
 	
 	@GetMapping("/customers/{id}")
-	Customer findCustomerById(@PathVariable Long id);
+
+	Customer findCustomerById(@PathVariable("id") Long id);
 	
 	@GetMapping("/customers")
-	 List<Customer> allCultomer();
+	 List<Customer> allCultomers();
 
 }

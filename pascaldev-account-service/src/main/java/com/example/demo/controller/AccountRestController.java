@@ -14,14 +14,16 @@ import com.example.demo.model.Customer;
 import com.example.demo.repository.BankAccountRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@Slf4j
 public class AccountRestController {
 	
 	private final BankAccountRepository accountRepository;
-	private  CustomerRestClient customerRestClient;
+	private final CustomerRestClient customerRestClient;
 	
 	
 	
@@ -31,12 +33,12 @@ public class AccountRestController {
 	} 
 	
 	@GetMapping("/accounts/{id}")
-	public BankAccount bankAccountById(@PathVariable Long id) {
+	public BankAccount bankAccountById(@PathVariable("id") Long id) {
 		
 		BankAccount account = accountRepository.findById(id).get(); 
 		Customer customer = customerRestClient.findCustomerById(account.getCustomerId());
 		account.setCustomer(customer);
-			return account;
+		return account;
 	}
 
 }
