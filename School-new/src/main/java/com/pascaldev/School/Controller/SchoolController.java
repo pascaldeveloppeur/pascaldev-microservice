@@ -19,7 +19,7 @@ import com.pascaldev.School.Service.SchoolService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/v1/schools")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class SchoolController {
 	
@@ -34,13 +34,14 @@ private final SchoolService schoolService;
 		schoolService.saveSchool(school);
 	}
 	
-	@GetMapping
+	@GetMapping("/schools")
 	public ResponseEntity<List<School>> findAllSchools(){
 		return ResponseEntity.ok(schoolService.findAllSchools());
 	}
 	
-	public ResponseEntity<FullSchoolResponse> findAllSschools(
-			@PathVariable("school-id") Long schoolId){
+	@GetMapping("/schools/{schoolId}")
+	public ResponseEntity<?> findSchoolById(
+			@PathVariable("schoolId") Long schoolId){
 		
 		return ResponseEntity.ok(schoolService.findAllSchoolsWithStudents(schoolId));
 	}

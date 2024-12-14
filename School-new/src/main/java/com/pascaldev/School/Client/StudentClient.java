@@ -11,7 +11,7 @@ import com.pascaldev.School.Entities.Student;
 @FeignClient(name="student-server", url = "http://localhost:8090/api/v1/students")
 public interface StudentClient {
 
-	@GetMapping("/school/{school-id}")
-	List<Student> findAllStudentsBySchool(@PathVariable("school_id") Long schoolId);
+	@GetMapping("/school/{schoolId}")
+	List<Student> findAllStudentsBySchool(@PathVariable("schoolId") Long schoolId);
 	
 }

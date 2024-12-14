@@ -31,13 +31,13 @@ public class SchoolService {
 		
 		var school = schoolRepository.findById(schoolId)
 				.orElse(School.builder()
-				.name("NOT_FOUND")
-				.email("NOT_FOUND")
+				.schoolName("NOT_FOUND")
+				.schoolEmail("NOT_FOUND")
 			    .build());
 		var students = studentClient.findAllStudentsBySchool(schoolId);
 		return FullSchoolResponse.builder()
-				.name(school.getName())
-				.email(school.getEmail())
+				.name(school.getSchoolName())
+				.email(school.getSchoolEmail())
 				.students(students)
 				.build();
 	}
