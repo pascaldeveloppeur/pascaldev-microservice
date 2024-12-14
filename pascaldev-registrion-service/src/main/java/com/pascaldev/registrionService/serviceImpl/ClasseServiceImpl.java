@@ -1,23 +1,21 @@
 package com.pascaldev.registrionService.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
+import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
+import com.pascaldev.registrionService.dto.ClasseDto;
+import com.pascaldev.registrionService.model.Classe;
+import com.pascaldev.registrionService.repository.ClasseRepository;
+import com.pascaldev.registrionService.service.ClasseService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.pascaldev.pascaldev_utild_service.model.PascalDevException;
-import com.pascaldev.registrionService.dto.ClasseDto;
-import com.pascaldev.registrionService.model.Classe;
-import com.pascaldev.registrionService.repository.ClasseRepository;
-import com.pascaldev.registrionService.service.ClasseService;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -1,12 +1,9 @@
 package com.pascaldev.registrionService.dto;
 
-import org.modelmapper.ModelMapper;
-
-
 import com.pascaldev.registrionService.model.Inscription;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.modelmapper.ModelMapper;
 
 @AllArgsConstructor
 @Data
