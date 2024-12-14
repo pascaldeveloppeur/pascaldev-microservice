@@ -1,6 +1,7 @@
 package com.pascaldev.course_service.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -43,6 +44,6 @@ public class Course implements Serializable {
 	private String courseName;
 	  
 	@OneToMany( mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Subject> subjects;
+	private List<Subject> subjects = new ArrayList<>();
 
 }

@@ -181,10 +181,13 @@ public class CourserServiceImpl implements CourseService<CourseDto> {
 				throw new PascalDevException("unable.save.subject.with.empty.name");
 			}
 			Optional<Subject> subject = subjectRepository.findById(SubjectDto.fromSubjectDto(subjectDto).getId());
+			
 			if (subject.isPresent()) {
 				log.trace("this subject already exist");
 				return null;
 			}
+			Course course = courseRepository.findByCourseName(subjectDto.getCourseDto().getCourseName());
+			subjectDto.setCourseDto(CourseDto.fromCourse(course));
 			Subject newSubject = subjectRepository.save(SubjectDto.fromSubjectDto(subjectDto));
 			return SubjectDto.fromSubject(newSubject);
 
