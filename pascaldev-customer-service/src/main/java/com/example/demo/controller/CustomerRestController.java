@@ -11,20 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entities.Customer;
 import com.example.demo.repository.CustomerRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class CustomerRestController {
 	
-	@Autowired
-	private CustomerRepository customerRepository;
+	
+	private final CustomerRepository customerRepository;
+	
 	
 	@GetMapping("/customers")
 	public List<Customer> customerList(){
 		return customerRepository.findAll();
 	} 
 	
-	@GetMapping("/customer/{id}")
-	public Customer customerById(@PathVariable Long id) {
+	@GetMapping("/customers/{id}")
+	public Customer customerById(@PathVariable("id") Long id) {
 		
 			return customerRepository.findById(id).get();
 	}
