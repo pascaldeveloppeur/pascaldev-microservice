@@ -31,10 +31,10 @@ pipeline {
 				 sh """ 
 				   echo " ${env.WORKSPACE}"
 				 """
-				//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                //doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', depth: 1, noTags: true, reference: '', shallow: true, timeout: 120]], 
-				//submoduleCfg: [],userRemoteConfigs: [[credentialsId: '5a607575-dcba-4ef3-8521-3b407f792647', url:
-                // 'https://github.com/pascaldeveloppeur/pascaldev-microservice.git']]])
+				checkout([$class: 'GitSCM', branches: [[name: '*/master']],
+                doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', depth: 1, noTags: true, reference: '', shallow: true, timeout: 120]], 
+				submoduleCfg: [],userRemoteConfigs: [[credentialsId: '5a607575-dcba-4ef3-8521-3b407f792647', url:
+                 'https://github.com/pascaldeveloppeur/pascaldev-microservice.git/pascaldev-configuration-service/']]])
 				 
 				 
 			 }
