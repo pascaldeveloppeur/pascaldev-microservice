@@ -26,7 +26,7 @@ pipeline {
 					extensions: [
 					[$class: 'CloneOption', depth: 1, noTags: true, reference: '', shallow: true, timeout: 120]],
 					submoduleCfg: [],userRemoteConfigs: [[credentialsId: 'e212babc-0713-415a-9848-da7292bb3718', url:
-					 'http://saas1402fu.saas-secure.com/git/bcephal-configuration-repository.git']]])
+					 'https://github.com/pascaldeveloppeur/configuration-repository.git']]])
 				 }
 				 sh """ 
 				   echo " ${env.WORKSPACE}"
@@ -34,7 +34,7 @@ pipeline {
 				//checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                 //doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CloneOption', depth: 1, noTags: true, reference: '', shallow: true, timeout: 120]], 
 				//submoduleCfg: [],userRemoteConfigs: [[credentialsId: '5a607575-dcba-4ef3-8521-3b407f792647', url:
-                // 'http://saas1402fu.saas-secure.com/git/bcephal-configuration-service.git']]])
+                // 'https://github.com/pascaldeveloppeur/pascaldev-microservice.git']]])
 				 
 				 
 			 }
